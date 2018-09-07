@@ -1,0 +1,117 @@
+<!--
+<?php
+   include '../../header.php';
+?>
+<body  id="secondary_interior_page">
+<?php
+   include '../../topbar.php';
+?>
+
+<link rel="stylesheet" type="text/css" media="screen" href="/css/frontend_main.css" />
+<link rel="stylesheet" type="text/css" href="//css/sifr.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="/css/interior.css" media="screen" />
+
+<br>
+
+<div id="main_body">
+
+ TECHNICAL PART BEGINS HERE-->
+
+
+
+<center>
+<h1>Visual Text Correction (ICCV 2017) </h1>
+<h2><a href="http://amirmazaheri1990.github.io">Amir Mazaheri</a>  <a href="http://crcv.ucf.edu/people/faculty/shah.php">Mubarak Shah</a></h2>
+<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4-euj_8TUCg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<br>
+<br>
+<h2><a href="http://crcv.ucf.edu/papers/eccv2018/vtc.pdf">Paper</a> <a href="https://drive.google.com/file/d/1kiaR6K7lbZGdLkndEGPL-9cs1aCzJT2b/view?usp=sharing">Slides</a>
+<br>
+<h2><a href="https://sites.google.com/site/describingmovies/workshop-at-iccv-17" target="_blank">LSMDC Website for DATA</a></h2>
+<br>
+<h2><a href="https://drive.google.com/file/d/1Eu2RfPaB3cO9g1iAch6UKozvkjJX-E14/view?usp=sharing"> Falsified Words</a>
+<br>
+
+<!--
+<h2><a name="Introduction"></a>Introduction</h2>
+<br>
+
+In computer vision, due to Deep Convolutional Neural Networks (CNNs) dramatic success has been achieved in detection (e.g. object detection) and classification (e.g. action classification). Likewise, Recurrent Neural Networks (RNN) have been demonstrated to be very useful in Natural Language Processing (NLP) for language translation. Recently, new problems such as Visual Captioning (VC) and Visual Question Answering (VQA) have drawn a lot of interest, as these are very challenging problems and extremely valuable for both computer vision and natural language processing. Both Visual Captioning and Visual Question Answering are related to the Video-Fill-in-the-Blank (VFIB) problem, which is addressed in this paper.
+<br> <br>
+
+<center>
+<img src="./Figures/motivation.png"  width="40%"></center><br>
+
+Given a video and a descriptive sentence about that with one or more blanks, can we find the missing word?
+<br> <br>
+<hr>
+
+<h2><a name="Framework"></a>Our Approach</h2><br>
+<center>
+<img src="./Figures/framework2.png"  width="70%"></center><br>
+To find the missing word, we incorporate three modules named 1)Textual encoder, 2) Spatial attention, and 3) Temporal encoder.
+<br> <br>
+<hr>
+<center>
+<img src="./Figures/textual_encoder.png"  width="50%"></center><br>
+
+Our sentence encoder method learns to represent a fragmented sentence by encoding each fragment twice. It encodes each fragment independently for the first time and respect to the opposite side for the second time.
+
+<br> <br>
+
+<hr>
+<table>
+ <tr>
+   <td style="padding:5px">
+     <center>
+     <img src="./Figures/spatial_attention.png"  width="100%" float=left></center>
+   </td>
+   <td style="padding:5px">
+     <center>
+     <img src="./Figures/temporal_attention.png"  width="100%" float=left></center>
+   </td>
+ </tr>
+</table>
+Spatial(left) and temporal(right) Attention models find the most important spatial and temporal parts of the video respect to the input text.
+
+<br> <br>
+
+<hr>
+
+<center>
+<img src="./Figures/qualitative.png"  width="50%"></center><br>
+
+
+
+<h2><a name="Downloads"></a>Downloads</h2><br>
+
+PDF file of the paper can be downloaded.
+<a href="https://arxiv.org/pdf/1704.04689.pdf">here </a>.
+
+<br>
+
+
+LSMDC dataset and also more info about the challenge are available here:
+<a href="https://sites.google.com/site/describingmovies/workshop-at-iccv-17">here </a>.
+-->
+<br>
+<br>
+
+
+<h2><a name="Related_Publications"></a>Related Publications</h2><br>
+
+<a href="http://amirmazaheri1990.github.io">Amir Mazaheri</a> <a href="http://www.dromston.com/">Dong Zhang</a>  <a href="http://crcv.ucf.edu/people/faculty/shah.php">Mubarak Shah</a>,
+"Video Fill In the Blank using LR/RL LSTMs with Spatial-Temporal Attentions",
+<i>in Proceedings of IEEE International Conference on Computer Vision (<b>ICCV</b>), October 2017</i>
+[<a href="https://arxiv.org/pdf/1704.04689.pdf" target="_blank">PDF</a>]
+<br>
+<br>
+
+<a href="http://amirmazaheri1990.github.io">Amir Mazaheri</a> <a href="http://crcv.ucf.edu/people/faculty/shah.php">Mubarak Shah</a>,
+"Visual Text Correction",
+<i>in Proceedings of European Conference on Computer Vision (<b>ECCV</b>). Springer, September 2018</i>
+[<a href="http://crcv.ucf.edu/papers/eccv2018/vtc.pdf" target="_blank">PDF</a>]
+
+<br>
+<br>
