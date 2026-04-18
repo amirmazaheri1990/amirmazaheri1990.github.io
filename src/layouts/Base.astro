@@ -60,6 +60,13 @@ const ogImage = new URL(image, site.url).toString();
 
     <PersonJsonLd />
 
+    <!-- Cloudflare Web Analytics (privacy-friendly, no cookies) -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "c5e4fb5e5f8a4a66be7829714c0afc7a"}'
+    ></script>
+
     <slot name="head" />
   </head>
   <body>
