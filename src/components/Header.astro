@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+
+const { pathname } = Astro.url;
+const normalize = (p: string) => p.replace(/\/$/, '') || '/';
+const current = normalize(pathname);
+---
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">{site.name}</a>
+    <nav aria-label="Primary">
+      {site.nav.map(({ href, label }) => (
+        <a
+          href={href}
+          aria-current={current === normalize(href) ? 'page' : undefined}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

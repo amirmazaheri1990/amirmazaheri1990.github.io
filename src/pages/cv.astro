@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title="CV" description={`Curriculum vitae for ${site.name}.`}>
+  <h1>CV</h1>
+  <p class="tagline">
+    Placeholder CV. A machine-readable version is available at
+    <a href="/cv.json">/cv.json</a> (JSON Resume schema).
+  </p>
+
+  <p class="row">
+    <a href="/cv.json">cv.json</a>
+    <span class="faint">·</span>
+    <a href={`mailto:${site.email}`}>Contact</a>
+  </p>
+
+  <h2><span class="section-emoji" aria-hidden="true">💼</span> Experience</h2>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Research Assistant</h3>
+      <span class="date">Aug 2013 – Present</span>
+    </div>
+    <p class="muted">Center for Research in Computer Vision (CRCV), UCF</p>
+    <p>
+      Ph.D. research with Dr. Mubarak Shah. Topics include Visual Question
+      Answering, Visual Text Correction, video prediction, and video retrieval.
+    </p>
+  </article>
+
+  <h2><span class="section-emoji" aria-hidden="true">🎓</span> Education</h2>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Ph.D., Computer Science (Computer Vision)</h3>
+      <span class="date">2013 – Present</span>
+    </div>
+    <p class="muted">University of Central Florida</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>M.S., Computer Science</h3>
+      <span class="date">2013 – 2016</span>
+    </div>
+    <p class="muted">University of Central Florida</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>B.S., Computer Engineering</h3>
+      <span class="date">2008 – 2013</span>
+    </div>
+    <p class="muted">Sharif University of Technology</p>
+  </article>
+
+  <h2><span class="section-emoji" aria-hidden="true">🧠</span> Research interests</h2>
+  <ul>
+    <li>Computer vision and deep learning.</li>
+    <li>Vision–language modeling and multimodal reasoning.</li>
+    <li>Video understanding, retrieval, and prediction.</li>
+  </ul>
+
+  <p class="muted">
+    <em>This page will be replaced with current content once the new resume is wired in.</em>
+  </p>
+</Base>

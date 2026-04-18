@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { getCollection } from 'astro:content';
+
+const allPubs = await getCollection('publications');
+const featuredPubs = allPubs
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.year - a.data.year);
+
+const featuredProjects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base>
+  <section class="profile">
+    <img src={site.profileImage} alt={`Portrait of ${site.name}`} width="144" height="144" />
+    <div>
+      <h1>{site.name}</h1>
+      <p class="role muted">{site.role}</p>
+    </div>
+  </section>
+
+  <p class="tagline">{site.tagline}</p>
+
+  <div class="row">
+    <a href="/publications">Publications</a>
+    <span class="faint">·</span>
+    <a href="/projects">Projects</a>
+    <span class="faint">·</span>
+    <a href="/cv">CV</a>
+    <span class="faint">·</span>
+    <a href={site.links.github} rel="me noopener">GitHub</a>
+    <span class="faint">·</span>
+    <a href={site.links.linkedin} rel="me noopener">LinkedIn</a>
+    <span class="faint">·</span>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+
+  <h2><span class="section-emoji" aria-hidden="true">👋</span> About</h2>
+  <p>
+    I'm a computer vision researcher and engineer. My work sits at the
+    intersection of visual perception and language — video understanding,
+    visual question answering, and vision–language models.
+  </p>
+  <p class="muted">
+    <em>This site is being rebuilt. The content below is placeholder pulled
+    from the previous version and will be refreshed shortly.</em>
+  </p>
+
+  <h2><span class="section-emoji" aria-hidden="true">🔭</span> Current focus</h2>
+  <ul>
+    <li>Vision–language modeling and multimodal reasoning.</li>
+    <li>Robust video understanding and retrieval.</li>
+    <li>Bridging research and production ML systems.</li>
+  </ul>
+
+  {featuredProjects.length > 0 && (
+    <>
+      <h2><span class="section-emoji" aria-hidden="true">🧪</span> Selected projects</h2>
+      <div class="stack">
+        {featuredProjects.map((p) => (
+          <a href={`/projects#${p.slug}`} class="card">
+            <div class="row-between">
+              <h3>{p.data.title}</h3>
+              {p.data.period && <span class="date">{p.data.period}</span>}
+            </div>
+            <p class="muted">{p.data.summary}</p>
+          </a>
+        ))}
+      </div>
+    </>
+  )}
+
+  {featuredPubs.length > 0 && (
+    <>
+      <h2><span class="section-emoji" aria-hidden="true">📄</span> Selected publications</h2>
+      <div class="stack">
+        {featuredPubs.map((p) => (
+          <div class="card">
+            <div class="row-between">
+              <h3>{p.data.title}</h3>
+              <span class="date">{p.data.venue} {p.data.year}</span>
+            </div>
+            <p class="muted">{p.data.authors.join(', ')}</p>
+          </div>
+        ))}
+      </div>
+      <p><a href="/publications">See all publications →</a></p>
+    </>
+  )}
+</Base>

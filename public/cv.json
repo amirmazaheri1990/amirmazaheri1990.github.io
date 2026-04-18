@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Amir Mazaheri",
+    "label": "Computer Vision Researcher & Engineer",
+    "email": "amirmazaheri1990@gmail.com",
+    "url": "https://amirmazaheri1990.github.io",
+    "image": "https://amirmazaheri1990.github.io/profile.jpg",
+    "summary": "Computer vision researcher and engineer working at the intersection of visual perception and language — video understanding, visual question answering, and vision–language models. This file is a placeholder and will be updated with the latest CV content.",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "amirmazaheri1990",
+        "url": "https://github.com/amirmazaheri1990"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "amirmazaheri1990",
+        "url": "https://www.linkedin.com/in/amirmazaheri1990/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Center for Research in Computer Vision (CRCV), University of Central Florida",
+      "position": "Research Assistant",
+      "startDate": "2013-08",
+      "summary": "Ph.D. research with Dr. Mubarak Shah on Visual Question Answering, Visual Text Correction, video prediction, and video retrieval."
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Central Florida",
+      "area": "Computer Science (Computer Vision)",
+      "studyType": "Ph.D.",
+      "startDate": "2013"
+    },
+    {
+      "institution": "University of Central Florida",
+      "area": "Computer Science",
+      "studyType": "M.S.",
+      "startDate": "2013",
+      "endDate": "2016"
+    },
+    {
+      "institution": "Sharif University of Technology",
+      "area": "Computer Engineering",
+      "studyType": "B.S.",
+      "startDate": "2008",
+      "endDate": "2013"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Visual Text Correction",
+      "publisher": "ECCV",
+      "releaseDate": "2018",
+      "url": "https://amirmazaheri1990.github.io/VTC/",
+      "summary": "Introduces the Visual Text Correction task: detect and correct inaccuracies in a video's textual description."
+    },
+    {
+      "name": "Video Fill In the Blank using LR/RL LSTMs with Spatial-Temporal Attentions",
+      "publisher": "ICCV",
+      "releaseDate": "2017",
+      "summary": "Bidirectional LSTMs with spatial-temporal attention for video fill-in-the-blank."
+    },
+    {
+      "name": "Learning a Multi-concept Video Retrieval Model with Multiple Latent Variables",
+      "publisher": "ACM TOMM",
+      "releaseDate": "2017",
+      "summary": "Latent-variable model for multi-concept video retrieval."
+    }
+  ],
+  "skills": [
+    { "name": "Computer Vision", "keywords": ["video understanding", "image recognition", "vision-and-language"] },
+    { "name": "Deep Learning", "keywords": ["CNNs", "RNNs/LSTMs", "transformers"] },
+    { "name": "Machine Learning", "keywords": ["representation learning", "latent-variable models"] }
+  ],
+  "meta": {
+    "canonical": "https://amirmazaheri1990.github.io/cv.json",
+    "version": "placeholder",
+    "lastModified": "2026-04-18"
+  }
+}

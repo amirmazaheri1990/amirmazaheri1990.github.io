@@ -1,0 +1,31 @@
+---
+import { site } from '../data/site';
+
+const sameAs = [site.links.github, site.links.linkedin, site.links.googleScholar, site.links.twitter]
+  .filter((u): u is string => Boolean(u));
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.role,
+  email: `mailto:${site.email}`,
+  url: site.url,
+  image: new URL(site.profileImage, site.url).toString(),
+  sameAs,
+  knowsAbout: [
+    'Computer Vision',
+    'Deep Learning',
+    'Machine Learning',
+    'Vision and Language',
+    'Visual Question Answering',
+    'Video Understanding',
+  ],
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(person)}
+/>

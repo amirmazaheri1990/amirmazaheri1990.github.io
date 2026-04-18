@@ -5,165 +5,233 @@ Guidance for AI assistants (Claude Code) working in this repository.
 ## Project Overview
 
 This repo is the personal GitHub Pages site for **Amir Mazaheri**
-(`amirmazaheri1990.github.io`) — a static résumé / CV plus a project
-landing page for the ECCV 2018 *Visual Text Correction* (VTC) paper.
+(`amirmazaheri1990.github.io`) — a Notion-style personal site for a
+computer vision researcher and engineer.
 
-The site is a lightly customized fork of the **Start Bootstrap "Resume"**
-template (v4.0.0-beta.2, Bootstrap 4). It is deployed automatically by
-GitHub Pages from the `master` branch — the site is published as
-served, there is no CI build step that produces a `dist/` output.
+The site is a static site built with **Astro 4** and deployed to GitHub
+Pages via GitHub Actions (`.github/workflows/deploy.yml`). Pages source
+in the repo settings must be set to **"GitHub Actions"** for the workflow
+to publish.
 
-Because GitHub Pages serves files as-is, **any edit to `scss/*.scss` or
-`js/resume.js` requires running the Gulp build and committing the
-generated `css/resume.css`, `css/resume.min.css`, and `js/resume.min.js`
-files alongside the source changes.** `index.html` references the
-minified assets directly.
+The previous incarnation of this site was a Start Bootstrap "Resume"
+template driven by Gulp. That stack has been fully removed. The only
+legacy asset preserved is the standalone **VTC** project page (ECCV 2018
+*Visual Text Correction*), served at `/VTC/` directly from
+`public/VTC/index.html`.
 
 ## Repository Layout
 
 ```
 .
-├── index.html              # Main résumé page (the site's home)
-├── VTC/
-│   └── index.html          # Project page for the Visual Text Correction paper
-├── scss/                   # Source SCSS — edit these, then run gulp
-│   ├── resume.scss         # Entry point; imports partials below
-│   ├── _variables.scss
-│   ├── _mixins.scss
-│   ├── _global.scss
-│   ├── _nav.scss
-│   ├── _resume-item.scss
-│   └── _bootstrap-overrides.scss
-├── css/                    # Generated — do NOT hand-edit
-│   ├── resume.css          # Compiled from scss/resume.scss
-│   └── resume.min.css      # Minified; referenced by index.html
-├── js/
-│   ├── resume.js           # Source — smooth-scroll, scrollspy, menu collapse
-│   └── resume.min.js       # Generated; referenced by index.html
-├── img/profile.jpg         # Profile photo shown in the sidebar
-├── vendor/                 # Third-party libs copied from node_modules
-│   ├── bootstrap/          # Bootstrap 4 beta (core CSS + JS bundle)
-│   ├── jquery/             # jQuery 3
-│   ├── jquery-easing/      # Easing plugin (used by smooth scroll)
-│   ├── font-awesome/       # Icon font for social/nav icons
-│   ├── devicons/           # Tech-stack icons
-│   └── simple-line-icons/  # Additional icon set
-├── gulpfile.js             # Build pipeline (Gulp 3)
-├── package.json            # npm deps + template metadata
-├── .travis.yml             # Legacy Travis config (not connected to deploy)
-├── googlef6aaf7bba013404b.html  # Google Search Console verification — do not remove
-├── LICENSE                 # MIT (Start Bootstrap original)
-└── README.md               # Original template README (upstream)
+├── astro.config.mjs             # Astro config (site URL, sitemap integration)
+├── tsconfig.json                # Strict Astro TS config
+├── package.json                 # Astro 4 + @astrojs/sitemap (pinned 3.2.1)
+├── src/
+│   ├── data/
+│   │   └── site.ts              # Single source of truth: name, role, links, nav
+│   ├── layouts/
+│   │   └── Base.astro           # <html>, head (SEO/OG/JSON-LD), header, footer
+│   ├── components/
+│   │   ├── Header.astro         # Sticky top nav with aria-current highlighting
+│   │   ├── Footer.astro         # Contact + llms.txt link
+│   │   └── PersonJsonLd.astro   # schema.org Person JSON-LD (injected into head)
+│   ├── content/
+│   │   ├── config.ts            # Content-collection schemas (publications, projects)
+│   │   ├── publications/        # One Markdown file per paper
+│   │   └── projects/            # One Markdown file per project
+│   ├── pages/
+│   │   ├── index.astro          # Home: profile, about, featured pubs + projects
+│   │   ├── publications.astro   # Grouped by year, ScholarlyArticle JSON-LD
+│   │   ├── projects.astro       # Projects list (renders Markdown body)
+│   │   ├── cv.astro             # Human-readable CV (placeholder)
+│   │   └── 404.astro
+│   └── styles/
+│       └── global.css           # Notion-style CSS (light + dark, CSS vars)
+├── public/                      # Copied to dist/ verbatim at build time
+│   ├── profile.jpg              # Profile photo (served at /profile.jpg)
+│   ├── cv.json                  # JSON Resume schema (machine-readable CV)
+│   ├── llms.txt                 # llmstxt.org summary for LLMs / agents
+│   ├── robots.txt
+│   ├── googlef6aaf7bba013404b.html   # Google Search Console verification
+│   └── VTC/                     # Legacy ECCV 2018 project page (kept as-is)
+│       ├── index.html
+│       └── googlef6aaf7bba013404b.html
+├── .github/workflows/deploy.yml # Build + deploy to GitHub Pages
+├── CLAUDE.md                    # This file
+├── README.md
+└── LICENSE
 ```
+
+Generated / ignored:
+
+- `dist/` — Astro build output. Never commit.
+- `node_modules/` — npm deps. Never commit.
+- `.astro/` — Astro type/cache. Never commit.
+
+## Tech Stack
+
+- **Astro 4** (static output, `build.format: 'directory'`).
+- **@astrojs/sitemap** pinned to `3.2.1`. Newer versions (3.3+) use the
+  `astro:routes:resolved` hook that only exists in Astro 5, so they
+  crash the build here. If you upgrade Astro to 5, also unpin sitemap.
+- **No CSS framework.** Styling is vanilla CSS with custom properties
+  and a Notion-inspired palette (see `src/styles/global.css`). Keep it
+  that way unless design needs clearly outgrow it.
+- **Content collections** for publications and projects. Add entries as
+  Markdown with frontmatter — do not hand-edit HTML for them.
+
+## Design Language (Notion-style)
+
+- System UI sans font (falls back to Inter/SF/Segoe). No web-font loads.
+- Max content width `--content-width: 720px` (wide layout `960px`).
+- Off-white light mode (`#fff` on `#37352f` text) and neutral dark mode,
+  both driven by `prefers-color-scheme`.
+- Generous vertical rhythm, subtle 1px `--border` dividers.
+- Emoji icons next to `<h2>` section headings (e.g. 👋 About, 🔭 Focus,
+  📄 Publications). Keep them consistent.
+- `.card` is the reusable content block: 1px border, subtle hover tint.
+- Sticky translucent header with blurred backdrop; `aria-current="page"`
+  highlights the active nav item.
+
+## SEO + Agent-Friendly Conventions
+
+The site is intentionally friendly to both search engines and LLM
+agents. Please preserve these when editing:
+
+- `Base.astro` emits per-page `<title>`, description, canonical URL,
+  OpenGraph, Twitter card, and the `Person` JSON-LD.
+- `src/pages/publications.astro` additionally emits an array of
+  `ScholarlyArticle` JSON-LD objects (one per publication). When you
+  add a publication, it flows through automatically.
+- `/sitemap-index.xml` is generated by `@astrojs/sitemap` at build.
+- `/robots.txt` points at the sitemap.
+- `/llms.txt` is a hand-maintained plain-text summary of the site for
+  LLMs, following <https://llmstxt.org/>. Update it when bio or
+  publications change materially.
+- `/cv.json` is a machine-readable CV using the JSON Resume schema
+  (<https://jsonresume.org/schema/>). Update alongside `src/pages/cv.astro`.
+- Use semantic HTML: `<article>` for each publication/project card,
+  `<header>` / `<footer>` / `<main>`, real `<h1>/<h2>/<h3>` hierarchy.
+- Always add meaningful `alt` text for images.
 
 ## Development Workflow
 
-### Install
+### Prereqs
 
-```bash
-npm install
-```
+- Node 18+ (tested on Node 20/22).
+- `npm ci` (or `npm install`) to hydrate `node_modules`.
 
-This project predates modern Node. The Gulp 3 / `gulp-sass` 3 stack is
-incompatible with Node 18+. Use **Node 10–12** (e.g. via `nvm use 10`) if
-you hit `ReferenceError: primordials is not defined` or SASS binding
-errors.
+### Commands
 
-### Build and preview
+| Command          | What it does                                             |
+|------------------|----------------------------------------------------------|
+| `npm run dev`    | Astro dev server with HMR at http://localhost:4321       |
+| `npm run build`  | Static build into `dist/`                                |
+| `npm run preview`| Serve the built `dist/` locally for a final check        |
 
-| Command          | What it does                                                  |
-|------------------|---------------------------------------------------------------|
-| `gulp`           | Runs `sass`, `minify-css`, `minify-js`, `copy` (full build)   |
-| `gulp dev`       | Starts BrowserSync, watches SCSS/JS/HTML, live-reloads        |
-| `gulp sass`      | Compiles `scss/resume.scss` → `css/resume.css`                |
-| `gulp minify-css`| Minifies `css/resume.css` → `css/resume.min.css`              |
-| `gulp minify-js` | Uglifies `js/resume.js` → `js/resume.min.js`                  |
-| `gulp copy`      | Refreshes `vendor/*` from `node_modules/*`                    |
+There are no tests. Treat a clean `npm run build` as the acceptance bar.
 
-If Gulp cannot be run in your environment, it is acceptable to edit
-`css/resume.css` / `css/resume.min.css` / `js/resume.min.js` by hand and
-keep them in sync with the source — but call this out explicitly in the
-commit message.
+### Deployment
 
-### No tests
+`.github/workflows/deploy.yml` runs on every push to `master`:
+`actions/checkout` → Node 20 → `npm ci` → `npm run build` → upload
+`dist/` → `actions/deploy-pages`. Repo setting **Settings → Pages →
+Build and deployment → Source** must be **GitHub Actions** (not
+"Deploy from a branch").
 
-There is no test suite. `npm test` is not configured; `.travis.yml` is
-a leftover from the upstream template.
+Do not commit `dist/`. The workflow handles it.
 
 ## Editing Conventions
 
-- **Content changes** (experience, education, publications, links) happen
-  directly in `index.html`. The existing section pattern is:
+### Add a publication
 
-  ```html
-  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="..">
-    <div class="my-auto">
-      <h2 class="mb-5">Section Title</h2>
-      <div class="resume-item d-flex flex-column flex-md-row mb-5">
-        <div class="resume-content mr-auto"> ... </div>
-        <div class="resume-date text-md-right">
-          <span class="text-primary">Date range</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  ```
+Create `src/content/publications/<slug>.md`:
 
-  Keep that structure when adding new entries — the styles in
-  `scss/_resume-item.scss` are tuned to it.
+```md
+---
+title: "Paper title"
+authors: ["Amir Mazaheri", "Co-author"]
+venue: "CVPR"
+year: 2025
+featured: false           # true -> shown on home page
+tags: ["vision-and-language"]
+links:
+  pdf: "https://..."
+  arxiv: "https://arxiv.org/abs/..."
+  code: "https://github.com/..."
+  project: "https://..."
+  video: "https://..."
+  slides: "https://..."
+  bibtex: "https://..."
+  doi: "https://doi.org/..."
+---
 
-- **Navigation** is the `<nav id="sideNav">` block at the top of
-  `index.html`. Each `<a>` uses `class="nav-link js-scroll-trigger"` and
-  `href="#section-id"`; scrollspy + smooth scroll in `js/resume.js` wire
-  the behaviour. If you add a section, add a matching nav link (and
-  match the `id` exactly).
+Short abstract or note (optional).
+```
 
-- **Styling changes** belong in `scss/` partials, not in the compiled
-  CSS. Import new partials from `scss/resume.scss`.
+Everything else (sorting, year grouping, JSON-LD) is automatic.
 
-- **Do not edit files in `vendor/`** by hand. They are refreshed by
-  `gulp copy` from `node_modules`. If a dependency needs to change, bump
-  it in `package.json` and re-run `npm install && gulp copy`.
+### Add a project
 
-- **VTC page** (`VTC/index.html`) is a separate, older standalone page
-  with its own inline styles and links to externally hosted assets. It
-  is not styled by the Bootstrap resume template. Treat it as isolated —
-  changes to the résumé template should not touch it.
+Create `src/content/projects/<slug>.md` with frontmatter matching
+`src/content/config.ts` (`title`, `summary`, optional `period`, `tags`,
+`links`, `featured`, `order`). The Markdown body is rendered inside the
+card on `/projects`.
 
-- **Comments in HTML**: avoid adding decorative or narrative comments.
-  The upstream template has very few; keep it that way.
+### Update contact info / name / social links
+
+Edit `src/data/site.ts`. This is consumed by the layout, header,
+footer, home page, and `PersonJsonLd`, so one change propagates.
+
+### Update the CV
+
+- Human view: `src/pages/cv.astro`.
+- Machine view: `public/cv.json`.
+- Summary for LLMs: `public/llms.txt`.
+Keep these three in rough sync; drifting is fine short-term, but don't
+let `cv.json` go stale silently.
+
+### Styling
+
+Edit `src/styles/global.css`. Prefer adding a new CSS custom property
+or utility class over inline styles. Keep changes accessible in both
+light and dark schemes.
+
+### VTC page
+
+`public/VTC/index.html` is an isolated legacy page. Don't restyle it
+with the Astro layout — it's intentionally self-contained and links to
+externally hosted assets.
 
 ## Git Workflow
 
-- `master` is the GitHub Pages publishing branch. Do **not** push
-  directly to `master` from Claude sessions unless the user explicitly
-  asks.
-- This session's development branch is
-  `claude/add-claude-documentation-AkE8n` (per task instructions).
-  General rule: develop on a `claude/<topic>-<suffix>` branch, commit,
-  and push with `git push -u origin <branch>`. Open a PR only when the
-  user asks.
-- When you change `scss/` or `js/resume.js`, commit the regenerated
-  `css/*.css` and `js/*.min.js` in the same commit so Pages stays
-  consistent.
-- Keep `googlef6aaf7bba013404b.html` at the repo root — it is the Google
-  Search Console verification file.
+- `master` is the deploying branch. Do **not** push to `master` from a
+  Claude session unless the user explicitly asks.
+- Default working branch for this session:
+  `claude/add-claude-documentation-AkE8n`. For new work prefer a fresh
+  `claude/<topic>-<suffix>` branch.
+- Push with `git push -u origin <branch>`. Open a PR only when asked.
+- Do not commit `dist/`, `node_modules/`, or `.astro/` — `.gitignore`
+  already covers them.
 
 ## GitHub Integration Notes
 
-- GitHub MCP tools are scoped to `amirmazaheri1990/amirmazaheri1990.github.io`
-  only. Do not attempt to reach other repos.
+- GitHub MCP tools are scoped to
+  `amirmazaheri1990/amirmazaheri1990.github.io` only. Do not attempt to
+  reach other repos.
 - Do not open PRs or post comments unless explicitly requested.
 
-## Quick Reference for Common Tasks
+## Known Gotchas
 
-- **Add a publication** → edit the `<ul>` inside `<section id="skills">`
-  in `index.html`. No build needed (HTML only).
-- **Change profile photo** → replace `img/profile.jpg` (square, served
-  via `.rounded-circle`).
-- **Change accent color / fonts** → edit `scss/_variables.scss`, then
-  `gulp sass && gulp minify-css`, commit the CSS output.
-- **Add a nav section** → new `<section id="x">` in `index.html` + new
-  `<a href="#x" class="nav-link js-scroll-trigger">` in `#sideNav`.
-- **Change scroll behaviour** → edit `js/resume.js`, then
-  `gulp minify-js` and commit `js/resume.min.js`.
+- **Sitemap pin.** Don't bump `@astrojs/sitemap` past `3.2.1` without
+  also upgrading Astro to 5.x — the newer sitemap uses a hook that only
+  exists on Astro 5, and the build will fail with
+  `Cannot read properties of undefined (reading 'reduce')`.
+- **GitHub Pages source.** The workflow uses the Pages artifact +
+  deploy-pages action. If the user reports "my push went through but
+  the site didn't change", check that the Pages source is set to
+  GitHub Actions, not a branch.
+- **Absolute vs. root-relative URLs.** This is a user site
+  (`amirmazaheri1990.github.io`), served from `/`. Links should be
+  root-relative (`/publications`, `/cv.json`). Don't introduce a `base`
+  path.
