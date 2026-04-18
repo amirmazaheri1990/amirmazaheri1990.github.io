@@ -1,0 +1,237 @@
+# CLAUDE.md
+
+Guidance for AI assistants (Claude Code) working in this repository.
+
+## Project Overview
+
+This repo is the personal GitHub Pages site for **Amir Mazaheri**
+(`amirmazaheri1990.github.io`) — a Notion-style personal site for a
+computer vision researcher and engineer.
+
+The site is a static site built with **Astro 4** and deployed to GitHub
+Pages via GitHub Actions (`.github/workflows/deploy.yml`). Pages source
+in the repo settings must be set to **"GitHub Actions"** for the workflow
+to publish.
+
+The previous incarnation of this site was a Start Bootstrap "Resume"
+template driven by Gulp. That stack has been fully removed. The only
+legacy asset preserved is the standalone **VTC** project page (ECCV 2018
+*Visual Text Correction*), served at `/VTC/` directly from
+`public/VTC/index.html`.
+
+## Repository Layout
+
+```
+.
+├── astro.config.mjs             # Astro config (site URL, sitemap integration)
+├── tsconfig.json                # Strict Astro TS config
+├── package.json                 # Astro 4 + @astrojs/sitemap (pinned 3.2.1)
+├── src/
+│   ├── data/
+│   │   └── site.ts              # Single source of truth: name, role, links, nav
+│   ├── layouts/
+│   │   └── Base.astro           # <html>, head (SEO/OG/JSON-LD), header, footer
+│   ├── components/
+│   │   ├── Header.astro         # Sticky top nav with aria-current highlighting
+│   │   ├── Footer.astro         # Contact + llms.txt link
+│   │   └── PersonJsonLd.astro   # schema.org Person JSON-LD (injected into head)
+│   ├── content/
+│   │   ├── config.ts            # Content-collection schemas (publications, projects)
+│   │   ├── publications/        # One Markdown file per paper
+│   │   └── projects/            # One Markdown file per project
+│   ├── pages/
+│   │   ├── index.astro          # Home: profile, about, featured pubs + projects
+│   │   ├── publications.astro   # Grouped by year, ScholarlyArticle JSON-LD
+│   │   ├── projects.astro       # Projects list (renders Markdown body)
+│   │   ├── cv.astro             # Human-readable CV (placeholder)
+│   │   └── 404.astro
+│   └── styles/
+│       └── global.css           # Notion-style CSS (light + dark, CSS vars)
+├── public/                      # Copied to dist/ verbatim at build time
+│   ├── profile.jpg              # Profile photo (served at /profile.jpg)
+│   ├── cv.json                  # JSON Resume schema (machine-readable CV)
+│   ├── llms.txt                 # llmstxt.org summary for LLMs / agents
+│   ├── robots.txt
+│   ├── googlef6aaf7bba013404b.html   # Google Search Console verification
+│   └── VTC/                     # Legacy ECCV 2018 project page (kept as-is)
+│       ├── index.html
+│       └── googlef6aaf7bba013404b.html
+├── .github/workflows/deploy.yml # Build + deploy to GitHub Pages
+├── CLAUDE.md                    # This file
+├── README.md
+└── LICENSE
+```
+
+Generated / ignored:
+
+- `dist/` — Astro build output. Never commit.
+- `node_modules/` — npm deps. Never commit.
+- `.astro/` — Astro type/cache. Never commit.
+
+## Tech Stack
+
+- **Astro 4** (static output, `build.format: 'directory'`).
+- **@astrojs/sitemap** pinned to `3.2.1`. Newer versions (3.3+) use the
+  `astro:routes:resolved` hook that only exists in Astro 5, so they
+  crash the build here. If you upgrade Astro to 5, also unpin sitemap.
+- **No CSS framework.** Styling is vanilla CSS with custom properties
+  and a Notion-inspired palette (see `src/styles/global.css`). Keep it
+  that way unless design needs clearly outgrow it.
+- **Content collections** for publications and projects. Add entries as
+  Markdown with frontmatter — do not hand-edit HTML for them.
+
+## Design Language (Notion-style)
+
+- System UI sans font (falls back to Inter/SF/Segoe). No web-font loads.
+- Max content width `--content-width: 720px` (wide layout `960px`).
+- Off-white light mode (`#fff` on `#37352f` text) and neutral dark mode,
+  both driven by `prefers-color-scheme`.
+- Generous vertical rhythm, subtle 1px `--border` dividers.
+- Emoji icons next to `<h2>` section headings (e.g. 👋 About, 🔭 Focus,
+  📄 Publications). Keep them consistent.
+- `.card` is the reusable content block: 1px border, subtle hover tint.
+- Sticky translucent header with blurred backdrop; `aria-current="page"`
+  highlights the active nav item.
+
+## SEO + Agent-Friendly Conventions
+
+The site is intentionally friendly to both search engines and LLM
+agents. Please preserve these when editing:
+
+- `Base.astro` emits per-page `<title>`, description, canonical URL,
+  OpenGraph, Twitter card, and the `Person` JSON-LD.
+- `src/pages/publications.astro` additionally emits an array of
+  `ScholarlyArticle` JSON-LD objects (one per publication). When you
+  add a publication, it flows through automatically.
+- `/sitemap-index.xml` is generated by `@astrojs/sitemap` at build.
+- `/robots.txt` points at the sitemap.
+- `/llms.txt` is a hand-maintained plain-text summary of the site for
+  LLMs, following <https://llmstxt.org/>. Update it when bio or
+  publications change materially.
+- `/cv.json` is a machine-readable CV using the JSON Resume schema
+  (<https://jsonresume.org/schema/>). Update alongside `src/pages/cv.astro`.
+- Use semantic HTML: `<article>` for each publication/project card,
+  `<header>` / `<footer>` / `<main>`, real `<h1>/<h2>/<h3>` hierarchy.
+- Always add meaningful `alt` text for images.
+
+## Development Workflow
+
+### Prereqs
+
+- Node 18+ (tested on Node 20/22).
+- `npm ci` (or `npm install`) to hydrate `node_modules`.
+
+### Commands
+
+| Command          | What it does                                             |
+|------------------|----------------------------------------------------------|
+| `npm run dev`    | Astro dev server with HMR at http://localhost:4321       |
+| `npm run build`  | Static build into `dist/`                                |
+| `npm run preview`| Serve the built `dist/` locally for a final check        |
+
+There are no tests. Treat a clean `npm run build` as the acceptance bar.
+
+### Deployment
+
+`.github/workflows/deploy.yml` runs on every push to `master`:
+`actions/checkout` → Node 20 → `npm ci` → `npm run build` → upload
+`dist/` → `actions/deploy-pages`. Repo setting **Settings → Pages →
+Build and deployment → Source** must be **GitHub Actions** (not
+"Deploy from a branch").
+
+Do not commit `dist/`. The workflow handles it.
+
+## Editing Conventions
+
+### Add a publication
+
+Create `src/content/publications/<slug>.md`:
+
+```md
+---
+title: "Paper title"
+authors: ["Amir Mazaheri", "Co-author"]
+venue: "CVPR"
+year: 2025
+featured: false           # true -> shown on home page
+tags: ["vision-and-language"]
+links:
+  pdf: "https://..."
+  arxiv: "https://arxiv.org/abs/..."
+  code: "https://github.com/..."
+  project: "https://..."
+  video: "https://..."
+  slides: "https://..."
+  bibtex: "https://..."
+  doi: "https://doi.org/..."
+---
+
+Short abstract or note (optional).
+```
+
+Everything else (sorting, year grouping, JSON-LD) is automatic.
+
+### Add a project
+
+Create `src/content/projects/<slug>.md` with frontmatter matching
+`src/content/config.ts` (`title`, `summary`, optional `period`, `tags`,
+`links`, `featured`, `order`). The Markdown body is rendered inside the
+card on `/projects`.
+
+### Update contact info / name / social links
+
+Edit `src/data/site.ts`. This is consumed by the layout, header,
+footer, home page, and `PersonJsonLd`, so one change propagates.
+
+### Update the CV
+
+- Human view: `src/pages/cv.astro`.
+- Machine view: `public/cv.json`.
+- Summary for LLMs: `public/llms.txt`.
+Keep these three in rough sync; drifting is fine short-term, but don't
+let `cv.json` go stale silently.
+
+### Styling
+
+Edit `src/styles/global.css`. Prefer adding a new CSS custom property
+or utility class over inline styles. Keep changes accessible in both
+light and dark schemes.
+
+### VTC page
+
+`public/VTC/index.html` is an isolated legacy page. Don't restyle it
+with the Astro layout — it's intentionally self-contained and links to
+externally hosted assets.
+
+## Git Workflow
+
+- `master` is the deploying branch. Do **not** push to `master` from a
+  Claude session unless the user explicitly asks.
+- Default working branch for this session:
+  `claude/add-claude-documentation-AkE8n`. For new work prefer a fresh
+  `claude/<topic>-<suffix>` branch.
+- Push with `git push -u origin <branch>`. Open a PR only when asked.
+- Do not commit `dist/`, `node_modules/`, or `.astro/` — `.gitignore`
+  already covers them.
+
+## GitHub Integration Notes
+
+- GitHub MCP tools are scoped to
+  `amirmazaheri1990/amirmazaheri1990.github.io` only. Do not attempt to
+  reach other repos.
+- Do not open PRs or post comments unless explicitly requested.
+
+## Known Gotchas
+
+- **Sitemap pin.** Don't bump `@astrojs/sitemap` past `3.2.1` without
+  also upgrading Astro to 5.x — the newer sitemap uses a hook that only
+  exists on Astro 5, and the build will fail with
+  `Cannot read properties of undefined (reading 'reduce')`.
+- **GitHub Pages source.** The workflow uses the Pages artifact +
+  deploy-pages action. If the user reports "my push went through but
+  the site didn't change", check that the Pages source is set to
+  GitHub Actions, not a branch.
+- **Absolute vs. root-relative URLs.** This is a user site
+  (`amirmazaheri1990.github.io`), served from `/`. Links should be
+  root-relative (`/publications`, `/cv.json`). Don't introduce a `base`
+  path.

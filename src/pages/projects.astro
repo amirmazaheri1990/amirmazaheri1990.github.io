@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const linkLabel: Record<string, string> = {
+  site: 'Project site',
+  code: 'Code',
+  paper: 'Paper',
+  demo: 'Demo',
+};
+---
+
+<Base title="Projects" description="Research and engineering projects by Amir Mazaheri.">
+  <h1>Projects</h1>
+  <p class="tagline">Selected research and engineering work.</p>
+
+  <div class="stack">
+    {projects.map(async (project) => {
+      const { Content } = await project.render();
+      return (
+        <article class="card" id={project.slug}>
+          <div class="row-between">
+            <h3>{project.data.title}</h3>
+            {project.data.period && <span class="date">{project.data.period}</span>}
+          </div>
+          <p class="muted">{project.data.summary}</p>
+          <Content />
+          {project.data.tags.length > 0 && (
+            <p class="row">
+              {project.data.tags.map((t) => <span class="tag">{t}</span>)}
+            </p>
+          )}
+          {Object.entries(project.data.links).filter(([, v]) => v).length > 0 && (
+            <p class="row">
+              {Object.entries(project.data.links)
+                .filter(([, v]) => v)
+                .map(([k, v]) => (
+                  <a href={v as string} rel="noopener">{linkLabel[k] ?? k}</a>
+                ))}
+            </p>
+          )}
+        </article>
+      );
+    })}
+  </div>
+</Base>
