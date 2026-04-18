@@ -3,12 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { getCollection } from 'astro:content';
 
-const allPubs = await getCollection('publications');
-const featuredPubs = allPubs
-  .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.year - a.data.year);
-
-const featuredProjects = (await getCollection('projects'))
+const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 ---
@@ -25,8 +20,6 @@ const featuredProjects = (await getCollection('projects'))
   <p class="tagline">{site.tagline}</p>
 
   <div class="row">
-    <a href="/publications">Publications</a>
-    <span class="faint">·</span>
     <a href="/projects">Projects</a>
     <span class="faint">·</span>
     <a href="/cv">CV</a>
@@ -63,38 +56,55 @@ const featuredProjects = (await getCollection('projects'))
     <li>Production-scale multimodal AI — from research to real-world deployment.</li>
   </ul>
 
-  {featuredProjects.length > 0 && (
+  {featured.length > 0 && (
     <>
       <h2><span class="section-emoji" aria-hidden="true">🧪</span> Selected projects</h2>
       <div class="stack">
-        {featuredProjects.map((p) => (
-          <a href={`/projects#${p.slug}`} class="card">
-            <div class="row-between">
-              <h3>{p.data.title}</h3>
-              {p.data.period && <span class="date">{p.data.period}</span>}
-            </div>
-            <p class="muted">{p.data.summary}</p>
-          </a>
-        ))}
+        {featured.map((p) => {
+          const venues = p.data.publications.map((pub) => `${pub.venue} ${pub.year}`);
+          const hasPatent = p.data.patents.length > 0;
+          return (
+            <a href={`/projects/${p.slug}`} class="card project-card">
+              <div class="row-between">
+                <h3>{p.data.title}</h3>
+                {p.data.period && <span class="date">{p.data.period}</span>}
+              </div>
+              <p class="muted">{p.data.summary}</p>
+              <div class="row">
+                {venues.map((v) => <span class="badge venue">{v}</span>)}
+                {hasPatent && <span class="badge patent">Patent</span>}
+              </div>
+            </a>
+          );
+        })}
       </div>
-    </>
-  )}
-
-  {featuredPubs.length > 0 && (
-    <>
-      <h2><span class="section-emoji" aria-hidden="true">📄</span> Selected publications</h2>
-      <div class="stack">
-        {featuredPubs.map((p) => (
-          <div class="card">
-            <div class="row-between">
-              <h3>{p.data.title}</h3>
-              <span class="date">{p.data.venue} {p.data.year}</span>
-            </div>
-            <p class="muted">{p.data.authors.join(', ')}</p>
-          </div>
-        ))}
-      </div>
-      <p><a href="/publications">See all publications →</a></p>
+      <p><a href="/projects">See all projects →</a></p>
     </>
   )}
 </Base>
+
+<style>
+.project-card { display: block; color: inherit; }
+.project-card h3 { color: var(--text); }
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.badge.venue {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.badge.patent {
+  background: color-mix(in srgb, #f59e0b 12%, transparent);
+  color: #b45309;
+  border-color: color-mix(in srgb, #f59e0b 30%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  .badge.patent { color: #fbbf24; }
+}
+</style>
