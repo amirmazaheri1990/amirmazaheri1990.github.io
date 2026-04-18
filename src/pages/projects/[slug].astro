@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const { title, summary, period, tags, links, publications, patents } = project.data;
+
+const pubLinkLabel: Record<string, string> = {
+  pdf: 'PDF',
+  arxiv: 'arXiv',
+  code: 'Code',
+  project: 'Project page',
+  video: 'Video',
+  slides: 'Slides',
+  doi: 'DOI',
+};
+
+const scholarlyArticles = publications.map((pub) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: pub.title,
+  author: pub.authors.map((name: string) => ({ '@type': 'Person', name })),
+  datePublished: String(pub.year),
+  isPartOf: pub.venue,
+  url: pub.links.project ?? pub.links.pdf ?? pub.links.arxiv,
+}));
+---
+
+<Base title={title} description={summary}>
+  {scholarlyArticles.length > 0 && (
+    <script
+      slot="head"
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(scholarlyArticles)}
+    />
+  )}
+
+  <p><a href="/projects">← All projects</a></p>
+
+  <div class="project-header">
+    <h1>{title}</h1>
+    {period && <p class="date">{period}</p>}
+    <p class="tagline">{summary}</p>
+    {tags.length > 0 && (
+      <div class="row">
+        {tags.map((t) => <span class="tag">{t}</span>)}
+      </div>
+    )}
+  </div>
+
+  <div class="prose">
+    <Content />
+  </div>
+
+  {publications.length > 0 && (
+    <section>
+      <h2><span class="section-emoji" aria-hidden="true">📄</span> {publications.length === 1 ? 'Publication' : 'Publications'}</h2>
+      <div class="stack">
+        {publications.map((pub) => (
+          <article class="card">
+            <div class="row-between">
+              <h3>{pub.title}</h3>
+              <span class="badge venue">{pub.venue} {pub.year}</span>
+            </div>
+            <p class="muted">{pub.authors.join(', ')}</p>
+            {Object.entries(pub.links).filter(([, v]) => v).length > 0 && (
+              <p class="row">
+                {Object.entries(pub.links)
+                  .filter(([, v]) => v)
+                  .map(([k, v]) => (
+                    <a href={v as string} rel="noopener">{pubLinkLabel[k] ?? k}</a>
+                  ))}
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {patents.length > 0 && (
+    <section>
+      <h2><span class="section-emoji" aria-hidden="true">📜</span> {patents.length === 1 ? 'Patent' : 'Patents'}</h2>
+      <div class="stack">
+        {patents.map((patent) => (
+          <article class="card">
+            <h3>{patent.title}</h3>
+            <p class="muted">U.S. Patent · {patent.number}</p>
+            {patent.url && (
+              <p><a href={patent.url} rel="noopener">View patent →</a></p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {Object.values(links).some(Boolean) && (
+    <section>
+      <h2><span class="section-emoji" aria-hidden="true">🔗</span> Links</h2>
+      <p class="row">
+        {links.site && <a href={links.site} rel="noopener">Project site</a>}
+        {links.code && <a href={links.code} rel="noopener">Code</a>}
+        {links.demo && <a href={links.demo} rel="noopener">Demo</a>}
+        {links.video && <a href={links.video} rel="noopener">Video</a>}
+      </p>
+    </section>
+  )}
+</Base>
+
+<style>
+.project-header {
+  margin-bottom: 2rem;
+}
+.project-header h1 {
+  margin-bottom: 0.25rem;
+}
+.prose {
+  margin: 1.5rem 0 2rem;
+  line-height: 1.75;
+}
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge.venue {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+</style>
