@@ -14,4 +14,4 @@ links:
   video: "https://www.youtube.com/watch?v=4-euj_8TUCg"
 ---
 
-Introduces the Visual Text Correction task: detecting and correcting inaccuracies in a textual description of a video. Published at ECCV 2018.
+Introduces Visual Text Correction (VTC), a novel task focused on correcting inaccuracies in video descriptions. The method detects errors and suggests accurate replacements by understanding video–text semantics and word relations, demonstrating the ability to automate text correction for video content.

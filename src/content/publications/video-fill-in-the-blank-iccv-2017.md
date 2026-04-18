@@ -10,4 +10,4 @@ tags: ["vision-and-language", "video", "attention"]
 links: {}
 ---
 
-Proposes bidirectional LSTMs with spatial-temporal attention to answer fill-in-the-blank questions over video.
+Tackles the Video-Fill-In-the-Blank (VFIB) challenge by proposing a framework using dual LSTMs for textual encoding of sentence fragments, integrated with external memory, and employing spatial and temporal attention models for visual encoding. Effectively selects discriminative visual features to accurately predict missing words in video descriptions.

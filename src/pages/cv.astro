@@ -3,67 +3,125 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 ---
 
-<Base title="CV" description={`Curriculum vitae for ${site.name}.`}>
+<Base title="CV" description={`Curriculum vitae for ${site.name} — Computer Vision Research Scientist.`}>
   <h1>CV</h1>
-  <p class="tagline">
-    Placeholder CV. A machine-readable version is available at
-    <a href="/cv.json">/cv.json</a> (JSON Resume schema).
-  </p>
 
   <p class="row">
+    <a href="/AmirMazaheri_CV_2026.pdf" rel="noopener">Download PDF</a>
+    <span class="faint">·</span>
     <a href="/cv.json">cv.json</a>
     <span class="faint">·</span>
-    <a href={`mailto:${site.email}`}>Contact</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <span class="faint">·</span>
+    <a href={site.links.linkedin} rel="me noopener">LinkedIn</a>
+    <span class="faint">·</span>
+    <a href={site.links.github} rel="me noopener">GitHub</a>
   </p>
 
   <h2><span class="section-emoji" aria-hidden="true">💼</span> Experience</h2>
 
   <article class="card">
     <div class="row-between">
-      <h3>Research Assistant</h3>
-      <span class="date">Aug 2013 – Present</span>
+      <h3>Staff Machine Learning Engineer — Computer Vision</h3>
+      <span class="date">Jul 2025 – Present</span>
     </div>
-    <p class="muted">Center for Research in Computer Vision (CRCV), UCF</p>
-    <p>
-      Ph.D. research with Dr. Mubarak Shah. Topics include Visual Question
-      Answering, Visual Text Correction, video prediction, and video retrieval.
-    </p>
+    <p class="muted"><strong>Warner Bros. Discovery (HBO)</strong> · San Francisco, CA</p>
+    <p>Leading large-scale video understanding and content moderation systems, including automated harmful content detection and multi-modal safety classifiers for HBO's streaming platform. Developing temporal segmentation, scene/shot boundary detection, VLM-powered video indexing, and LLM-enhanced metadata generation for fine-grained video search and discovery across Warner Bros.' catalog.</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Senior Machine Learning Engineer — Computer Vision</h3>
+      <span class="date">Sep 2021 – Jul 2025</span>
+    </div>
+    <p class="muted"><strong>Tubi</strong> · San Francisco, CA</p>
+    <p>Developed AI-driven content analysis and personalization solutions using Vision-Language Models, including brand identification and logo detection, scene segmentation, personalized trailers and content artwork generation through user preference modeling, and LLM-powered recommendation enhancements.</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Algorithm Scientist</h3>
+      <span class="date">Jul 2020 – Sep 2021</span>
+    </div>
+    <p class="muted"><strong>Aibee U.S. Corporation</strong> · Palo Alto, CA</p>
+    <p>Designed and implemented CV models for human tracking in crowds, person re-identification, and AI-based benchmarking tools for tracking.</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Research Scientist Intern</h3>
+      <span class="date">May 2018 – Aug 2018</span>
+    </div>
+    <p class="muted"><strong>Netflix</strong> · Los Gatos, CA</p>
+    <p>Developed a semi-supervised activity detection system for identifying events in movies without human annotations and trained an attentive deep neural network to optimize movie billboard design based on visual patterns.</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Research Fellowship</h3>
+      <span class="date">Jun 2017 – Aug 2018</span>
+    </div>
+    <p class="muted"><strong>Nielsen</strong> · Orlando, FL</p>
+    <p>Developed automated methods for TV advertisement analysis focusing on classification, tagging, and descriptive analysis of broadcast ads.</p>
+  </article>
+
+  <article class="card">
+    <div class="row-between">
+      <h3>Graduate Research Assistant</h3>
+      <span class="date">Aug 2013 – Apr 2020</span>
+    </div>
+    <p class="muted"><strong>Center for Research in Computer Vision (CRCV), UCF</strong> · Orlando, FL</p>
+    <p>PhD research with <a href="https://www.crcv.ucf.edu/person/mubarak-shah/" rel="noopener">Prof. Mubarak Shah</a>. Topics include Visual Question Answering, Visual Text Correction, video generation, video retrieval, and multimodal AI.</p>
   </article>
 
   <h2><span class="section-emoji" aria-hidden="true">🎓</span> Education</h2>
 
   <article class="card">
     <div class="row-between">
-      <h3>Ph.D., Computer Science (Computer Vision)</h3>
-      <span class="date">2013 – Present</span>
+      <h3>Ph.D., Computer Science</h3>
+      <span class="date">Apr 2020</span>
     </div>
-    <p class="muted">University of Central Florida</p>
+    <p class="muted">University of Central Florida · FL, USA</p>
+    <p>Advisor: Prof. Mubarak Shah, CRCV<br/>Dissertation: <em>Video Content Understanding Using Text</em></p>
   </article>
 
   <article class="card">
     <div class="row-between">
-      <h3>M.S., Computer Science</h3>
-      <span class="date">2013 – 2016</span>
+      <h3>M.Sc., Computer Science</h3>
+      <span class="date">May 2016</span>
     </div>
-    <p class="muted">University of Central Florida</p>
+    <p class="muted">University of Central Florida · FL, USA</p>
   </article>
 
   <article class="card">
     <div class="row-between">
-      <h3>B.S., Computer Engineering</h3>
-      <span class="date">2008 – 2013</span>
+      <h3>B.S., Computer Science</h3>
+      <span class="date">Jul 2013</span>
     </div>
-    <p class="muted">Sharif University of Technology</p>
+    <p class="muted">Sharif University of Technology · Tehran, Iran</p>
   </article>
 
-  <h2><span class="section-emoji" aria-hidden="true">🧠</span> Research interests</h2>
-  <ul>
-    <li>Computer vision and deep learning.</li>
-    <li>Vision–language modeling and multimodal reasoning.</li>
-    <li>Video understanding, retrieval, and prediction.</li>
-  </ul>
+  <h2><span class="section-emoji" aria-hidden="true">🧠</span> Skills</h2>
 
-  <p class="muted">
-    <em>This page will be replaced with current content once the new resume is wired in.</em>
-  </p>
+  <article class="card">
+    <p><strong>Languages:</strong> Python, C/C++, SQL, MATLAB; familiar with Scala, Java</p>
+    <p><strong>ML Frameworks:</strong> PyTorch, TensorFlow, Keras</p>
+    <p><strong>VLMs & LLMs:</strong> Expert in state-of-the-art VLMs and LLMs; instruction tuning, multimodal fine-tuning for video/content understanding</p>
+    <p><strong>Cloud & Big Data:</strong> AWS, Apache Spark, PySpark</p>
+    <p><strong>DevOps:</strong> Docker, CI/CD pipelines</p>
+  </article>
+
+  <h2><span class="section-emoji" aria-hidden="true">📜</span> Patents</h2>
+
+  <article class="card">
+    <h3>Machine learning techniques for advanced frequency management</h3>
+    <p class="muted">U.S. Patent · US20240314371A1</p>
+  </article>
+
+  <article class="card">
+    <h3>Multimedia scene break detection</h3>
+    <p class="muted">U.S. Patent · US20240357217A1</p>
+  </article>
+
+  <p><a href="/publications">See all publications →</a></p>
 </Base>

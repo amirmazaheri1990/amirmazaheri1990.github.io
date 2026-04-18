@@ -1,9 +1,9 @@
 export const site = {
   name: 'Amir Mazaheri',
-  role: 'Computer Vision Researcher & Engineer',
+  role: 'Computer Vision Research Scientist · PhD',
   tagline:
-    'Research and engineering at the intersection of computer vision, deep learning, and language.',
-  location: '',
+    'Staff ML Engineer at Warner Bros. Discovery (HBO). Deep expertise in large-scale video understanding, Vision-Language Models, and multimodal AI.',
+  location: 'Berkeley, CA',
   email: 'amirmazaheri1990@gmail.com',
   url: 'https://amirmazaheri1990.github.io',
   profileImage: '/profile.jpg',

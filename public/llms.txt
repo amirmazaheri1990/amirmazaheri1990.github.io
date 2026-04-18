@@ -1,9 +1,9 @@
 # Amir Mazaheri
 
-> Personal site of Amir Mazaheri — computer vision researcher and engineer.
-> Research and engineering at the intersection of computer vision, deep
-> learning, and language (video understanding, visual question answering,
-> vision–language models).
+> Computer Vision Research Scientist and PhD. Staff Machine Learning Engineer
+> at Warner Bros. Discovery (HBO). Deep expertise in large-scale video
+> understanding, Vision-Language Models (VLMs), and multimodal AI systems.
+> Based in Berkeley, CA.
 
 This file follows the proposal at https://llmstxt.org/ and is intended for
 large language models and agents that want a concise, machine-readable view
@@ -14,6 +14,7 @@ of the site.
 - Email: amirmazaheri1990@gmail.com
 - GitHub: https://github.com/amirmazaheri1990
 - LinkedIn: https://www.linkedin.com/in/amirmazaheri1990/
+- Location: Berkeley, CA
 
 ## Key pages
 
@@ -22,15 +23,48 @@ of the site.
 - [Projects](https://amirmazaheri1990.github.io/projects): research and engineering projects.
 - [CV](https://amirmazaheri1990.github.io/cv): curriculum vitae (human-readable).
 - [cv.json](https://amirmazaheri1990.github.io/cv.json): machine-readable CV (JSON Resume schema).
+- [CV PDF](https://amirmazaheri1990.github.io/AmirMazaheri_CV_2026.pdf): downloadable PDF resume.
 
-## Selected publications
+## Current role
 
-- Amir Mazaheri, Mubarak Shah. "Visual Text Correction." ECCV 2018.
-  Project: https://amirmazaheri1990.github.io/VTC/
-- Amir Mazaheri, Dong Zhang, Mubarak Shah. "Video Fill In the Blank using
-  LR/RL LSTMs with Spatial-Temporal Attentions." ICCV 2017.
-- Amir Mazaheri, Boqing Gong, Mubarak Shah. "Learning a Multi-concept Video
-  Retrieval Model with Multiple Latent Variables." ACM TOMM 2017.
+Staff Machine Learning Engineer — Computer Vision at Warner Bros. Discovery (HBO),
+San Francisco, CA (July 2025 – present). Leading large-scale video understanding,
+content moderation, temporal segmentation, VLM-powered video indexing, and
+LLM-enhanced metadata generation.
+
+## Career history (recent)
+
+- Warner Bros. Discovery (HBO) — Staff MLE, CV (2025–present)
+- Tubi — Senior MLE, CV (2021–2025)
+- Aibee U.S. Corporation — Algorithm Scientist (2020–2021)
+- Netflix — Research Scientist Intern (2018)
+- Nielsen — Research Fellowship (2017–2018)
+- UCF CRCV — Graduate Research Assistant / PhD (2013–2020)
+
+## Education
+
+- Ph.D., Computer Science — University of Central Florida (2020)
+  Advisor: Prof. Mubarak Shah, CRCV
+  Dissertation: "Video Content Understanding Using Text"
+- M.Sc., Computer Science — University of Central Florida (2016)
+- B.S., Computer Science — Sharif University of Technology (2013)
+
+## Publications (9 total, most recent first)
+
+- "WoundNet: A Domain-Adaptable Few-Shot Classification Framework for Wound Healing Assessment" — ISBI 2023
+- "Context-Aware Analysis of Group Submissions for Group Anomaly Detection and Performance Prediction" — AAAI 2023
+- "Video Generation from Text Employing Latent Path Construction for Temporal Modeling" — ICPR 2022
+- "MMFT-BERT: Multimodal Fusion Transformer with BERT Encodings for Visual Question Answering" — Findings of EMNLP 2020
+- "Deep Photo Cropper and Enhancement" — ICIP 2020
+- "Pay Attention! — Robustifying a Deep Visuomotor Policy through Task-Focused Attention" — CVPR 2019
+- "Visual Text Correction" — ECCV 2018. Project: https://amirmazaheri1990.github.io/VTC/
+- "Learning a Multi-concept Video Retrieval Model with Multiple Latent Variables" — ACM TOMM 2018
+- "Video Fill In the Blank using LR/RL LSTMs with Spatial-Temporal Attentions" — ICCV 2017
+
+## Patents
+
+- "Machine learning techniques for advanced frequency management" — U.S. Patent US20240314371A1
+- "Multimedia scene break detection" — U.S. Patent US20240357217A1
 
 ## Notes
 
