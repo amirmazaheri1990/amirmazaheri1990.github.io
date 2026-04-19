@@ -20,4 +20,4 @@ publications:
       slides: "https://drive.google.com/file/d/1kiaR6K7lbZGdLkndEGPL-9cs1aCzJT2b/view?usp=sharing"
 ---
 
-Introduces the Visual Text Correction (VTC) task: given a short video clip and a caption, detect the incorrect word and replace it with the correct one. We built a dataset on top of LSMDC by automatically falsifying captions, then trained a model that jointly localises the error and proposes a correction using video–text semantics.
+Introduces the Visual Text Correction (VTC) task: given a short video clip and a caption, detect the incorrect word and replace it with the correct one. We built a dataset on top of LSMDC by automatically falsifying captions, then trained a model that jointly localizes the error and proposes a correction using video–text semantics.

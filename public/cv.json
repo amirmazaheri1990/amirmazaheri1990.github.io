@@ -20,7 +20,7 @@
       "location": "San Francisco, CA",
       "position": "Staff Machine Learning Engineer — Computer Vision",
       "startDate": "2025-07",
-      "summary": "Leading large-scale video understanding and content moderation systems, including automated harmful content detection and multi-modal safety classifiers for HBO's streaming platform. Developing temporal segmentation, scene/shot boundary detection, VLM-powered video indexing, and LLM-enhanced metadata generation for fine-grained video search and discovery."
+      "summary": "Leading large-scale video understanding and content moderation systems, including automated harmful content detection and multimodal safety classifiers for HBO's streaming platform. Developing temporal segmentation, scene/shot boundary detection, VLM-powered video indexing, and LLM-enhanced metadata generation for fine-grained video search and discovery."
     },
     {
       "name": "Tubi",
@@ -36,7 +36,7 @@
       "position": "Algorithm Scientist",
       "startDate": "2020-07",
       "endDate": "2021-09",
-      "summary": "CV models for human tracking in crowds, person re-identification, and AI-based benchmarking tools for tracking."
+      "summary": "Computer vision models for human tracking in crowds, person re-identification, and AI-based benchmarking tools."
     },
     {
       "name": "Netflix",
@@ -67,20 +67,20 @@
     {
       "institution": "University of Central Florida",
       "area": "Computer Science",
-      "studyType": "Ph.D.",
+      "studyType": "PhD",
       "endDate": "2020-04",
       "score": "Dissertation: Video Content Understanding Using Text. Advisor: Prof. Mubarak Shah, CRCV."
     },
     {
       "institution": "University of Central Florida",
       "area": "Computer Science",
-      "studyType": "M.Sc.",
+      "studyType": "MSc",
       "endDate": "2016-05"
     },
     {
       "institution": "Sharif University of Technology",
       "area": "Computer Science",
-      "studyType": "B.S.",
+      "studyType": "BSc",
       "endDate": "2013-07"
     }
   ],
