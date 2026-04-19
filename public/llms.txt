@@ -43,11 +43,11 @@ LLM-enhanced metadata generation.
 
 ## Education
 
-- Ph.D., Computer Science — University of Central Florida (2020)
+- PhD, Computer Science — University of Central Florida (2020)
   Advisor: Prof. Mubarak Shah, CRCV
   Dissertation: "Video Content Understanding Using Text"
-- M.Sc., Computer Science — University of Central Florida (2016)
-- B.S., Computer Science — Sharif University of Technology (2013)
+- MSc, Computer Science — University of Central Florida (2016)
+- BSc, Computer Science — Sharif University of Technology (2013)
 
 ## Publications (9 total, most recent first)
 
