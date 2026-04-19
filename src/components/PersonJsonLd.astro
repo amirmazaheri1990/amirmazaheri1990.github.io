@@ -1,8 +1,9 @@
 ---
 import { site } from '../data/site';
 
-const sameAs = [site.links.github, site.links.linkedin, site.links.googleScholar, site.links.twitter]
-  .filter((u): u is string => Boolean(u));
+const sameAs = Object.values(site.links).filter(
+  (u): u is string => typeof u === 'string' && u.length > 0,
+);
 
 const person = {
   '@context': 'https://schema.org',

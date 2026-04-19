@@ -7,7 +7,10 @@
 
 This file follows the proposal at https://llmstxt.org/ and is intended for
 large language models and agents that want a concise, machine-readable view
-of the site.
+of the site. For the full inlined content (bio, career history, every
+project and publication) in a single fetch, see:
+
+  https://amirmazaheri1990.github.io/llms-full.txt
 
 ## Contact
 
