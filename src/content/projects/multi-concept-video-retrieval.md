@@ -11,7 +11,8 @@ publications:
     authors: ["Amir Mazaheri", "Boqing Gong", "Mubarak Shah"]
     venue: "ACM TOMM"
     year: 2018
-    links: {}
+    links:
+      pdf: "https://www.crcv.ucf.edu/wp-content/uploads/2019/09/NsfProjects_BigData_Learning-a-Multi-Concept-Video-Retrieval-Model-with-Multiple-Latent-Variables.pdf"
 ---
 
 Provides a foundational model for computing the ranking scores of a video in response to one or more concepts, where the concepts may be supplied directly by users or inferred by the system from user queries. Uses multiple latent variables to capture the diverse visual manifestations of each concept.
