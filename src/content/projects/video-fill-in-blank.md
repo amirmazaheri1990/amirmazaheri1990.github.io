@@ -5,7 +5,8 @@ period: "2016 – 2017"
 tags: ["vision-and-language", "video", "attention", "LSTM"]
 featured: false
 order: 9
-links: {}
+links:
+  video: "https://www.youtube.com/watch?v=Rj3ouss05hc"
 publications:
   - title: "Video Fill In the Blank using LR/RL LSTMs with Spatial-Temporal Attentions"
     authors: ["Amir Mazaheri", "Dong Zhang", "Mubarak Shah"]
@@ -13,6 +14,7 @@ publications:
     year: 2017
     links:
       arxiv: "https://arxiv.org/abs/1704.04689"
+      video: "https://www.youtube.com/watch?v=Rj3ouss05hc"
 ---
 
 Tackles the Video-Fill-In-the-Blank (VFIB) challenge by proposing a framework that uses dual LSTMs (left-to-right and right-to-left) for textual encoding of sentence fragments, integrated with external memory, and spatial and temporal attention models for visual encoding. The approach effectively selects discriminative visual features to accurately predict missing words in video descriptions.
