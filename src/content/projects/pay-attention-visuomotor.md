@@ -7,6 +7,7 @@ featured: false
 order: 6
 links:
   site: "https://www.crcv.ucf.edu/research/projects/pay-attention/"
+  video: "https://www.youtube.com/watch?v=eh43sI4v9ag&t=39s"
 publications:
   - title: "Pay Attention! — Robustifying a Deep Visuomotor Policy through Task-Focused Attention"
     authors: ["Amir Mazaheri", "Mubarak Shah"]
@@ -15,6 +16,7 @@ publications:
     links:
       pdf: "https://www.crcv.ucf.edu/wp-content/uploads/2019/05/Publications_Pay_attention.pdf"
       project: "https://pouyaab.github.io/pay-attention/"
+      video: "https://www.youtube.com/watch?v=eh43sI4v9ag&t=39s"
 ---
 
 Enhances robotic manipulation with Task-Focused visual Attention (TFA) to improve task execution and recovery from disturbances using natural language instructions. The approach increases resilience against visual and physical disruptions by mimicking human-like selective attention, leading to increased robustness and adaptability in robots.

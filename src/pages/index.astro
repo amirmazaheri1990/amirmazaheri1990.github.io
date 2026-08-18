@@ -63,18 +63,26 @@ const featured = (await getCollection('projects'))
         {featured.map((p) => {
           const venues = p.data.publications.map((pub) => `${pub.venue} ${pub.year}`);
           const hasPatent = p.data.patents.length > 0;
+          const videoUrl =
+            p.data.links.video ??
+            p.data.publications.find((pub) => pub.links.video)?.links.video;
           return (
-            <a href={`/projects/${p.slug}`} class="card project-card">
+            <article class="card project-card">
               <div class="row-between">
-                <h3>{p.data.title}</h3>
+                <h3>
+                  <a class="stretched-link" href={`/projects/${p.slug}`}>{p.data.title}</a>
+                </h3>
                 {p.data.period && <span class="date">{p.data.period}</span>}
               </div>
               <p class="muted">{p.data.summary}</p>
               <div class="row">
                 {venues.map((v) => <span class="badge venue">{v}</span>)}
                 {hasPatent && <span class="badge patent">Patent</span>}
+                {videoUrl && (
+                  <a class="badge video" href={videoUrl} rel="noopener" target="_blank">▶ Watch on YouTube</a>
+                )}
               </div>
-            </a>
+            </article>
           );
         })}
       </div>
@@ -84,8 +92,25 @@ const featured = (await getCollection('projects'))
 </Base>
 
 <style>
-.project-card { display: block; color: inherit; }
-.project-card h3 { color: var(--text); }
+.project-card {
+  position: relative;
+}
+.project-card h3 {
+  margin: 0 0 0.35rem;
+}
+.project-card h3 a {
+  color: var(--text);
+  border-bottom: none;
+}
+.project-card h3 a:hover {
+  color: var(--accent);
+}
+.stretched-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 .badge {
   display: inline-block;
   padding: 0.1rem 0.5rem;
@@ -104,7 +129,22 @@ const featured = (await getCollection('projects'))
   color: #b45309;
   border-color: color-mix(in srgb, #f59e0b 30%, transparent);
 }
+a.badge.video {
+  position: relative;
+  z-index: 1;
+  background: color-mix(in srgb, #ff0000 10%, transparent);
+  color: #cc0000;
+  border-color: color-mix(in srgb, #ff0000 30%, transparent);
+  border-bottom: none;
+  text-decoration: none;
+}
+a.badge.video:hover {
+  background: color-mix(in srgb, #ff0000 20%, transparent);
+  color: #a00000;
+}
 @media (prefers-color-scheme: dark) {
   .badge.patent { color: #fbbf24; }
+  a.badge.video { color: #ff8080; }
+  a.badge.video:hover { color: #ffb3b3; }
 }
 </style>
